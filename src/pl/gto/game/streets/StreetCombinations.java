@@ -16,24 +16,11 @@ public abstract class StreetCombinations {
 
     public static final int HAND_SIZE = 5;
 
-    protected final int[] indexes = IntStream.range(0, 7).toArray();
-    ;
+    protected final int[] indexes = IntStream.range(0, 7).toArray();;
     protected final List<int[]> combinations = new ArrayList<>();
 
     public StreetCombinations() {
         CombinationUtil.addCombination(combinations, indexes, indexes.length, HAND_SIZE);
-    }
-
-    public abstract List<Hand> getAllCombinationsForStreet(Hand hand, Card... cards);
-
-    protected void addHandCombinations(List<Hand> handCombinations, Card[] cards) {
-        for (int[] combination : combinations) {
-            Card[] cardToIndex = new Card[5];
-            for (int i = 0; i < combination.length; i++) {
-                cardToIndex[i] = cards[combination[i]];
-            }
-            handCombinations.add(new Hand(cardToIndex));
-        }
     }
 
     public static List<Hand> getAllCombinations(Hand hand, Card... cards) {
@@ -60,5 +47,17 @@ public abstract class StreetCombinations {
         combinations.sort(new HandComparator());
 
         return combinations.get(combinations.size() - 1);
+    }
+
+    public abstract List<Hand> getAllCombinationsForStreet(Hand hand, Card... cards);
+
+    protected void addHandCombinations(List<Hand> handCombinations, Card[] cards) {
+        for (int[] combination : combinations) {
+            Card[] cardToIndex = new Card[5];
+            for (int i = 0; i < combination.length; i++) {
+                cardToIndex[i] = cards[combination[i]];
+            }
+            handCombinations.add(new Hand(cardToIndex));
+        }
     }
 }

@@ -9,10 +9,7 @@ import java.util.stream.Collectors;
  * Created on 10/17/2016.
  */
 public enum Suit {
-    SPADE('s'),
-    HEART('h'),
-    DIAMOND('d'),
-    CLUB('c');
+    SPADE('s'), HEART('h'), DIAMOND('d'), CLUB('c');
 
     private static Map<Character, Suit> map = Arrays.stream(values()).collect(Collectors.toMap(Suit::getShortName, Function.identity()));
 
@@ -22,11 +19,11 @@ public enum Suit {
         this.shortName = shortName;
     }
 
-    public char getShortName() {
-        return shortName;
-    }
-
     public static Suit getByName(char shortName) {
         return map.get(shortName);
+    }
+
+    public char getShortName() {
+        return shortName;
     }
 }

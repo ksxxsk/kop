@@ -1,6 +1,5 @@
 package pl.gto.game.streets;
 
-
 import pl.gto.card.Card;
 import pl.gto.game.Deck;
 import pl.gto.hand.Hand;
@@ -23,7 +22,6 @@ public class TurnCombinations extends StreetCombinations {
 
         Deck deck = new Deck(hand.getCards());
         deck.removeAll(Arrays.asList(cards));
-
 
         for (Card c : deck) {
             dealtCards[6] = c;

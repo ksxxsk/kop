@@ -1,6 +1,5 @@
 package pl.gto.interpreter;
 
-
 import pl.gto.card.CardPool;
 import pl.gto.card.Rank;
 import pl.gto.card.Suit;
@@ -14,11 +13,11 @@ import java.util.Set;
  */
 public class Context {
 
+    private Set<Hand> parsedHands = new HashSet<>();
+
     public Set<Hand> getParsedHands() {
         return parsedHands;
     }
-
-    private Set<Hand> parsedHands = new HashSet<>();
 
     public void addOffsuitCombinations(Rank firstRank, Rank secondRank) {
         for (Suit first : Suit.values()) {

@@ -2,7 +2,6 @@ package pl.gto.interpreter.expression;
 
 import pl.gto.card.Rank;
 import pl.gto.interpreter.Context;
-import pl.gto.interpreter.Parser;
 
 /**
  * Created on 2016-12-01.

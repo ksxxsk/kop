@@ -1,6 +1,5 @@
 package pl.gto.hand;
 
-
 import pl.gto.card.Rank;
 
 import java.util.Comparator;
@@ -21,7 +20,6 @@ public class HandComparator implements Comparator<Hand> {
     private int compareRanks(Hand hand1, Hand hand2) {
         NavigableSet<Rank> hand1RanksSet = hand1.getRanks().descendingKeySet();
         Rank[] hand1Ranks = hand1RanksSet.toArray(new Rank[hand1RanksSet.size()]);
-
 
         NavigableSet<Rank> hand2RanksSet = hand2.getRanks().descendingKeySet();
         Rank[] hand2Ranks = hand2RanksSet.toArray(new Rank[hand2RanksSet.size()]);

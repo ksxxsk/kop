@@ -1,6 +1,5 @@
 package pl.gto.card;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ import java.util.Map;
  * Created on 10/17/2016.
  */
 public class CardPool {
-
 
     private static Map<Rank, Map<Suit, Card>> cards = new HashMap<>();
 

@@ -1,6 +1,5 @@
 package pl.gto.game;
 
-
 import pl.gto.card.Card;
 import pl.gto.card.Rank;
 import pl.gto.card.Suit;
@@ -27,7 +26,6 @@ public class Deck extends ArrayList<Card> {
             for (Suit suit : Suit.values())
                 add(new Card(rank, suit));
         }
-
 
     }
 

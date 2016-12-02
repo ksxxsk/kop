@@ -1,6 +1,5 @@
 package pl.gto.game.streets;
 
-
 import pl.gto.card.Card;
 import pl.gto.game.CombinationUtil;
 import pl.gto.game.Deck;

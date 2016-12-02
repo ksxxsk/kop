@@ -1,6 +1,5 @@
 package pl.gto.rank;
 
-
 import pl.gto.card.Rank;
 import pl.gto.hand.Hand;
 

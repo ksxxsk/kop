@@ -18,7 +18,8 @@ public abstract class InfiniteRangeExpression extends Expression {
         Rank secondRank = Rank.getByName(handString.charAt(1));
 
         for (int i = secondRank.ordinal(); i <= Rank.values().length - 1; i++) {
-            if (i == firstRank.ordinal()) continue;
+            if (i == firstRank.ordinal())
+                continue;
             addCardCombinations(context, firstRank, Rank.values()[i]);
         }
     }

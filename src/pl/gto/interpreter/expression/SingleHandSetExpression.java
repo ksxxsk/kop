@@ -23,5 +23,4 @@ public abstract class SingleHandSetExpression extends Expression {
 
     protected abstract void addCardCombinations(Context context, Rank firstRank, Rank secondRank);
 
-
 }

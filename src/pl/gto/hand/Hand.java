@@ -1,6 +1,5 @@
 package pl.gto.hand;
 
-
 import pl.gto.card.Card;
 import pl.gto.card.Rank;
 import pl.gto.card.Suit;
@@ -68,8 +67,10 @@ public class Hand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Hand hand = (Hand) o;
 

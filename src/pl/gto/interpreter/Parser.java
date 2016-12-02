@@ -37,7 +37,6 @@ public class Parser {
 
                     RangeIndicator rangeIndicator = RangeIndicator.valueOf(handString.substring(2, 3));
 
-
                     if (rangeIndicator.equals(RangeIndicator.s)) {
                         expression = new InfiniteSuitedRangeExpression(handString);
 
