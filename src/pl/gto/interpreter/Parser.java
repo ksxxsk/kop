@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Parser {
 
-    public Set<Hand> parse(String handString) {
+    public static Set<Hand> parse(String handString) {
         Context context = new Context();
         Expression expression = null;
 
@@ -66,7 +66,7 @@ public class Parser {
         return context.getParsedHands();
     }
 
-    public enum RangeIndicator {
+    private enum RangeIndicator {
         o, s
     }
 }

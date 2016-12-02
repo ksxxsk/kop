@@ -19,12 +19,11 @@ import static org.hamcrest.Matchers.equalTo;
 public class ParserTest {
 
     Set<Hand> referenceResult = new HashSet<>();
-    Parser parser = new Parser();
     String hand;
 
     @After
     public void tearDown() {
-        assertThat(parser.parse(hand), is(equalTo(referenceResult)));
+        assertThat(Parser.parse(hand), is(equalTo(referenceResult)));
         referenceResult.clear();
     }
 
@@ -34,7 +33,7 @@ public class ParserTest {
         Hand ak = new Hand(CardPool.get("Ad"), CardPool.get("Kh"));
         referenceResult.add(ak);
 
-        assertThat(parser.parse(hand), is(equalTo(referenceResult)));
+        assertThat(Parser.parse(hand), is(equalTo(referenceResult)));
     }
 
     @Test
