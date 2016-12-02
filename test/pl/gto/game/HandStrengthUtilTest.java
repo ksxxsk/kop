@@ -23,13 +23,13 @@ public class HandStrengthUtilTest {
 
         List<Hand> hero = StreetCombinations.getAllCombinations(AA, board);
 
-        List<Hand> range = new ArrayList<>();
+        Set<Hand> range = new HashSet<>();
         range.addAll(StreetCombinations.getAllCombinations(KK, board));
         range.addAll(StreetCombinations.getAllCombinations(AA, board));
 
         Set<Card> dealtCards = new HashSet<>();
         dealtCards.addAll(AA.getCards());
-        System.out.println(HandStrengthUtil.handVsRange(hero.get(2), range, dealtCards));
+//        System.out.println(HandStrengthUtil.handVsRange(hero.get(2), range, dealtCards));
     }
 
     @Test
@@ -72,8 +72,11 @@ public class HandStrengthUtilTest {
         List<Hand> villainRange = new ArrayList<>();
         for(Hand hand: villain)
             villainRange.add(StreetCombinations.getStrongestCombination(hand, board));
+
+        Set<Hand> test = new HashSet<>(villainRange);
+
         Hand hand = new Hand(CardPool.get("Ad"), CardPool.get("Qh"), CardPool.get("Jc"), CardPool.get("Td"), CardPool.get("4d"));
-        System.out.println(HandStrengthUtil.handVsRange(hand, villainRange, dealtCards ));
+//        System.out.println(HandStrengthUtil.handVsRange(hand, test, dealtCards ));
 //        System.out.println(HandStrengthUtil.rangeVsRange(heroRange, villainRange));
     }
 
