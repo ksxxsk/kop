@@ -1,9 +1,9 @@
 package pl.gto.game.streets;
 
 import pl.gto.card.Card;
-import pl.gto.game.CombinationUtil;
 import pl.gto.hand.Hand;
 import pl.gto.hand.HandComparator;
+import pl.gto.util.CombinationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.stream.IntStream;
  */
 public abstract class StreetCombinations {
 
-    public static final int HAND_SIZE = 5;
+    private static final int HAND_SIZE = 5;
 
-    protected final int[] indexes = IntStream.range(0, 7).toArray();;
-    protected final List<int[]> combinations = new ArrayList<>();
+    private final int[] indexes = IntStream.range(0, 7).toArray();
+    private final List<int[]> combinations = new ArrayList<>();
 
     public StreetCombinations() {
         CombinationUtil.addCombination(combinations, indexes, indexes.length, HAND_SIZE);
@@ -49,7 +49,7 @@ public abstract class StreetCombinations {
         return combinations.get(combinations.size() - 1);
     }
 
-    public abstract List<Hand> getAllCombinationsForStreet(Hand hand, Card... cards);
+    protected abstract List<Hand> getAllCombinationsForStreet(Hand hand, Card... cards);
 
     protected void addHandCombinations(List<Hand> handCombinations, Card[] cards) {
         for (int[] combination : combinations) {

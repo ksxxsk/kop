@@ -1,9 +1,9 @@
 package pl.gto.game.streets;
 
 import pl.gto.card.Card;
-import pl.gto.game.CombinationUtil;
 import pl.gto.game.Deck;
 import pl.gto.hand.Hand;
+import pl.gto.util.CombinationUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import java.util.stream.IntStream;
  */
 public class FlopCombinations extends StreetCombinations {
 
-    private final int[] additonalCardsIndexes = IntStream.range(0, 47).toArray();
     private final List<int[]> additonalCardsCombinations = new ArrayList<>();
 
     public FlopCombinations() {
+        int[] additonalCardsIndexes = IntStream.range(0, 47).toArray();
         CombinationUtil.addCombination(additonalCardsCombinations, additonalCardsIndexes, additonalCardsIndexes.length, 2);
     }
 

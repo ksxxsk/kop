@@ -1,4 +1,4 @@
-package pl.gto.rank;
+package pl.gto.hand;
 
 /**
  * Created on 11/8/2016.

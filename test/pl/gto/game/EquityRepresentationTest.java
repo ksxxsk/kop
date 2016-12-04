@@ -7,20 +7,26 @@ import pl.gto.card.CardPool;
 import pl.gto.hand.Hand;
 import pl.gto.interpreter.Parser;
 
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created on 12/2/2016.
  */
 public class EquityRepresentationTest {
 
-    private Set<Hand> heroRange = new HashSet<>();
-    private Set<Hand> villainRange = new HashSet<>();
-    private List<Card> board = Arrays.asList(new Card[]{CardPool.get("Td"), CardPool.get("Jc"), CardPool.get("3s"), CardPool.get("2d"), CardPool.get("4d")});
+
+    private final Set<Hand> heroRange = new HashSet<>();
+    private final Set<Hand> villainRange = new HashSet<>();
+    private final List<Card> board = Arrays.asList(CardPool.get("Td"), CardPool.get("Jc"), CardPool.get("3s"),
+            CardPool.get("2d"), CardPool.get("4d"));
 
     @After
     public void tearDown() {
@@ -29,52 +35,28 @@ public class EquityRepresentationTest {
     }
 
     @Test
-    public void handsWithBoardsCardsRemovedFromHeroStartingRange() {
+    public void utgOpenSBCall() {
 
-        heroRange.addAll(Parser.parse("A9o+"));
+        String heroRangeString = "9d9s";
+        String villainRangeString = "88-QQ,AQs,KJs+";
 
-        Set<Hand> referenceRange = new HashSet<>(heroRange);
-        removeHandsFromRangeWithCardsFromCollection(referenceRange, board);
+        Set<Hand> heroStartingRange = new HashSet<>();
+        Set<Hand> villainStartingRange = new HashSet<>();
 
-        EquityRepresentation eq = new EquityRepresentation(heroRange, villainRange, board);
+        parseHands(heroStartingRange, heroRangeString);
+        parseHands(villainStartingRange, villainRangeString);
 
-        assertThat(eq.getHeroRange(), is(equalTo(referenceRange)));
+        EquityRepresentation eq = new EquityRepresentation(heroStartingRange, villainStartingRange, board);
+
+        BigDecimal equity = eq.getHeroEquityMap().values().stream().map(BigDecimal::valueOf).reduce(BigDecimal.ZERO, BigDecimal::add)
+                .divide(BigDecimal.valueOf(eq.getHeroEquityMap().size()), 4, BigDecimal.ROUND_HALF_UP);
+
+        assertThat(equity, is(equalTo(BigDecimal.valueOf(0.4167))));
     }
 
-    @Test
-    public void handsWithBoardsCardsRemovedFromVillainStartingRange() {
-
-        villainRange.addAll(Parser.parse("A2s+"));
-
-        Set<Hand> referenceRange = new HashSet<>(villainRange);
-        removeHandsFromRangeWithCardsFromCollection(referenceRange, board);
-
-        EquityRepresentation eq = new EquityRepresentation(heroRange, villainRange, board);
-
-        assertThat(eq.getVillainRange(), is(equalTo(referenceRange)));
-    }
-
-    private void removeHandsFromRangeWithCardsFromCollection(Set<Hand> hands, Collection<Card> forbiddenCards) {
-        Iterator<Hand> iterator = hands.iterator();
-        while(iterator.hasNext()) {
-            Hand hand = iterator.next();
-            if(hand.containsAnyOf(board)) {
-                iterator.remove();
-            }
+    private void parseHands(Set<Hand> range, String rangeString) {
+        for (String handString : rangeString.split(",")) {
+            range.addAll(Parser.parse(handString));
         }
     }
-
-    @Test
-    public void countEquitiesForEachStartingHandInHeroRange() {
-
-        heroRange.addAll(Parser.parse("AdTs"));
-        heroRange.addAll(Parser.parse("KcJd"));
-        heroRange.addAll(Parser.parse("6d7d"));
-        heroRange.addAll(Parser.parse("JdJh"));
-
-        EquityRepresentation eq = new EquityRepresentation(heroRange, villainRange, board);
-
-
-    }
-
 }

@@ -1,4 +1,4 @@
-package pl.gto.game;
+package pl.gto.util;
 
 import java.util.Arrays;
 import java.util.List;

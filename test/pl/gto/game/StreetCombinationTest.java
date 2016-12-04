@@ -20,6 +20,7 @@ public class StreetCombinationTest {
     private static final int DECK_SIZE = 52;
     private static final int sevenFive = 21;
     private static final int fourtySevenTwo = 1081;
+
     @Test
     public void combinationOnTheFlop() {
         Hand hand = new Hand(CardPool.get("Ad"), CardPool.get("Kh"));

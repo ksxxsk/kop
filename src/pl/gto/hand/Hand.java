@@ -3,8 +3,7 @@ package pl.gto.hand;
 import pl.gto.card.Card;
 import pl.gto.card.Rank;
 import pl.gto.card.Suit;
-import pl.gto.rank.HandStrengthCalculator;
-import pl.gto.rank.PokerHand;
+import pl.gto.hand.strength.HandStrengthCalculator;
 
 import java.util.*;
 
@@ -46,7 +45,7 @@ public class Hand {
         ranks.putAll(tmpRanks);
 
         if (this.cards.size() == 5)
-            handStrength = HandStrengthCalculator.calculateRank(this);
+            handStrength = HandStrengthCalculator.calculateStrength(this);
     }
 
     public SortedSet<Card> getCards() {

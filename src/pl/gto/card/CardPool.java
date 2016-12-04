@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class CardPool {
 
-    private static Map<Rank, Map<Suit, Card>> cards = new HashMap<>();
+    private static final Map<Rank, Map<Suit, Card>> cards = new HashMap<>();
 
     static {
 

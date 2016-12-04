@@ -18,31 +18,31 @@ import static org.hamcrest.Matchers.equalTo;
  */
 public class ParserTest {
 
-    Set<Hand> referenceResult = new HashSet<>();
+    final Set<Hand> referenceResult = new HashSet<>();
     String hand;
 
     @After
     public void tearDown() {
-        assertThat(Parser.parse(hand), is(equalTo(referenceResult)));
+        assertThat(new HashSet<>(Parser.parse(hand)), is(equalTo(referenceResult)));
         referenceResult.clear();
     }
 
     @Test
     public void parseSingleHand() {
-        hand = "AdKh";
-        Hand ak = new Hand(CardPool.get("Ad"), CardPool.get("Kh"));
+        hand = "KdQh";
+        Hand ak = new Hand(CardPool.get("Kd"), CardPool.get("Qh"));
         referenceResult.add(ak);
 
-        assertThat(Parser.parse(hand), is(equalTo(referenceResult)));
+        assertThat(new HashSet<>(Parser.parse(hand)), is(equalTo(referenceResult)));
     }
 
     @Test
     public void parseSingeSuitedHand() {
-        hand = "AKs";
-        Hand diamond = new Hand(CardPool.get("Ad"), CardPool.get("Kd"));
-        Hand heart = new Hand(CardPool.get("Ah"), CardPool.get("Kh"));
-        Hand spade = new Hand(CardPool.get("As"), CardPool.get("Ks"));
-        Hand club = new Hand(CardPool.get("Ac"), CardPool.get("Kc"));
+        hand = "AQs";
+        Hand diamond = new Hand(CardPool.get("Ad"), CardPool.get("Qd"));
+        Hand heart = new Hand(CardPool.get("Ah"), CardPool.get("Qh"));
+        Hand spade = new Hand(CardPool.get("As"), CardPool.get("Qs"));
+        Hand club = new Hand(CardPool.get("Ac"), CardPool.get("Qc"));
 
         referenceResult.add(diamond);
         referenceResult.add(heart);
@@ -66,10 +66,10 @@ public class ParserTest {
     @Test
     public void parseSuitedInfiniteRangeAQPlus() {
 
-        hand = "AQs+";
+        hand = "KJs+";
         for (Suit suit : Suit.values()) {
-            referenceResult.add(new Hand(CardPool.get("A" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
-            referenceResult.add(new Hand(CardPool.get("A" + suit.getShortName()), CardPool.get("K" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("J" + suit.getShortName())));
         }
 
     }
@@ -82,7 +82,6 @@ public class ParserTest {
             referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("T" + suit.getShortName())));
             referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("J" + suit.getShortName())));
             referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
-            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("A" + suit.getShortName())));
         }
 
     }
@@ -117,7 +116,6 @@ public class ParserTest {
                 referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("T" + second.getShortName())));
                 referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("J" + second.getShortName())));
                 referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("Q" + second.getShortName())));
-                referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("A" + second.getShortName())));
             }
         }
 
@@ -161,7 +159,26 @@ public class ParserTest {
     }
 
     @Test
-    public void addSinglePair88() {
+    public void parsePairFiniteRangeJJto77() {
+
+        hand = "JJ-77";
+
+        for (Suit first : Suit.values()) {
+            for (Suit second : Suit.values()) {
+                if (first == second)
+                    continue;
+
+                referenceResult.add(new Hand(CardPool.get("7" + first.getShortName()), CardPool.get("7" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("8" + first.getShortName()), CardPool.get("8" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("9" + first.getShortName()), CardPool.get("9" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("T" + first.getShortName()), CardPool.get("T" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("J" + first.getShortName()), CardPool.get("J" + second.getShortName())));
+            }
+        }
+    }
+
+    @Test
+    public void parseSinglePair88() {
 
         hand = "88";
 
@@ -178,17 +195,44 @@ public class ParserTest {
     @Test
     public void parseSuitedFiniteRangeATtoAQ() {
 
-        hand = "ATs-AQs";
+        hand = "KTs-KQs";
         for (Suit suit : Suit.values()) {
-            referenceResult.add(new Hand(CardPool.get("A" + suit.getShortName()), CardPool.get("T" + suit.getShortName())));
-            referenceResult.add(new Hand(CardPool.get("A" + suit.getShortName()), CardPool.get("J" + suit.getShortName())));
-            referenceResult.add(new Hand(CardPool.get("A" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("T" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("J" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
         }
     }
 
     @Test
-    public void addOffsuitCombinationsK8toKJ() {
+    public void parseSuitedFiniteRangeAQtoAT() {
+
+        hand = "KQs-KTs";
+        for (Suit suit : Suit.values()) {
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("T" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("J" + suit.getShortName())));
+            referenceResult.add(new Hand(CardPool.get("K" + suit.getShortName()), CardPool.get("Q" + suit.getShortName())));
+        }
+    }
+
+    @Test
+    public void parseOffsuitFiniteRangeK8toKJ() {
         hand = "K8o-KJo";
+        for (Suit first : Suit.values()) {
+            for (Suit second : Suit.values()) {
+                if (first == second)
+                    continue;
+
+                referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("8" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("9" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("T" + second.getShortName())));
+                referenceResult.add(new Hand(CardPool.get("K" + first.getShortName()), CardPool.get("J" + second.getShortName())));
+            }
+        }
+    }
+
+    @Test
+    public void parseOffsuitFiniteRangeKJtoK8() {
+        hand = "KJo-K8o";
         for (Suit first : Suit.values()) {
             for (Suit second : Suit.values()) {
                 if (first == second)

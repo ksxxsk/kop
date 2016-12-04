@@ -3,14 +3,14 @@ package pl.gto.interpreter;
 import pl.gto.hand.Hand;
 import pl.gto.interpreter.expression.*;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created on 11/30/2016.
  */
 public class Parser {
 
-    public static Set<Hand> parse(String handString) {
+    public static List<Hand> parse(String handString) {
         Context context = new Context();
         Expression expression = null;
 

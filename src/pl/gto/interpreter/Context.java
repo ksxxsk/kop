@@ -5,17 +5,17 @@ import pl.gto.card.Rank;
 import pl.gto.card.Suit;
 import pl.gto.hand.Hand;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created on 2016-12-01.
  */
 public class Context {
 
-    private Set<Hand> parsedHands = new HashSet<>();
+    private final List<Hand> parsedHands = new ArrayList<>();
 
-    public Set<Hand> getParsedHands() {
+    public List<Hand> getParsedHands() {
         return parsedHands;
     }
 

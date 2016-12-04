@@ -12,12 +12,14 @@ public class HandComparator implements Comparator<Hand> {
 
     @Override
     public int compare(Hand hand1, Hand hand2) {
-        int strengthComparision = hand1.getHandStrength().compareTo(hand2.getHandStrength());
+        int strengthComparision = hand1.getHandStrength()
+                .compareTo(hand2.getHandStrength());
 
         return strengthComparision != 0 ? strengthComparision : compareRanks(hand1, hand2);
     }
 
     private int compareRanks(Hand hand1, Hand hand2) {
+
         NavigableSet<Rank> hand1RanksSet = hand1.getRanks().descendingKeySet();
         Rank[] hand1Ranks = hand1RanksSet.toArray(new Rank[hand1RanksSet.size()]);
 

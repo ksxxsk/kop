@@ -1,14 +1,15 @@
-package pl.gto.rank;
+package pl.gto.hand.strength;
 
 import pl.gto.card.Rank;
 import pl.gto.hand.Hand;
+import pl.gto.hand.PokerHand;
 
 /**
  * Created on 11/8/2016.
  */
 public class HandStrengthCalculator {
 
-    public static PokerHand calculateRank(Hand hand) {
+    public static PokerHand calculateStrength(Hand hand) {
 
         boolean isFlush = hand.getSuits().size() == 1;
         boolean isStraight = hand.getRanks().size() == 5 && (hand.getCards().last().getRank().ordinal() - hand.getCards().first().getRank().ordinal()) == 4;
