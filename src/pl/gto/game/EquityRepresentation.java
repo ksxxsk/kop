@@ -2,6 +2,7 @@ package pl.gto.game;
 
 import pl.gto.card.Card;
 import pl.gto.hand.Hand;
+import pl.gto.util.HandVsRangeCalculator;
 
 import java.util.Collection;
 import java.util.HashMap;
